@@ -15,11 +15,11 @@ public class Main {
         String operator = arrayStrings[1];
         num2 = romanToNumber(arrayStrings[2]);
 
-        if((num1 == -1 && num2 != -1) || (num2 == -1 && num1 != -1)) {
+        if(((num1 == -1) && (num2 != -1)) || ((num2 == -1) && (num1 != -1))) {
             throw new Exception("Вы допустили ошибку, повторите ввод.");
         }
 
-        if(num1 == -1 && num2 == -1) {
+        if((num1 == -1) && (num2 == -1)) {
             try {
                 isRoman = false;
                 num1 = Integer.parseInt(arrayStrings[0]);
@@ -28,6 +28,9 @@ public class Main {
                 throw new Exception("Вы допустили ошибку, повторите ввод.");
             }
         }
+
+        volidateNumber(num1);
+        volidateNumber(num2);
 
         scanner.close();
         switch (operator) {
@@ -55,6 +58,15 @@ public class Main {
                 System.out.printf("Вы допустили ошибку, повторите ввод.");
 
         }
+
+    }
+    private static void volidateNumber(int num) throws Exception {
+
+        if((num < 0) || (num > 10)) {
+            throw new Exception("Неверный диапозон ввода.");
+
+        }
+
     }
 
     private static void convertResult(int rez, boolean isRoman) {
