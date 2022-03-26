@@ -19,7 +19,7 @@ public class Main<num2, num1> {
             throw new Exception("Вы допустили ошибку, повторите ввод.");
         }
 
-        if ((num1 == -1) && (num2 != -1)) {
+        if ((num1 == -1) && (num2 == -1)) {
             try {
                 isRoman = false;
                 num1 = Integer.parseInt(arrayStrings[0]);
