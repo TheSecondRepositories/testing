@@ -1,7 +1,7 @@
 import  java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Main {
+public class Main<num2, num1> {
 
     public static void main(String[] args) throws Exception {
         int num1, num2, rez;
@@ -15,11 +15,11 @@ public class Main {
         String operator = arrayStrings[1];
         num2 = romanToNumber(arrayStrings[2]);
 
-        if(((num1 == -1) && (num2 != -1)) || ((num2 == -1) && (num1 != -1))) {
+        if (((num1 == -1) && (num2 != -1)) || ((num2 == -1) && (num1 != -1))) {
             throw new Exception("Вы допустили ошибку, повторите ввод.");
         }
 
-        if((num1 == -1) && (num2 == -1)) {
+        if ((num1 == -1) && (num2 != -1)) {
             try {
                 isRoman = false;
                 num1 = Integer.parseInt(arrayStrings[0]);
@@ -48,7 +48,7 @@ public class Main {
                 break;
 
             case "\\/":
-                if (num2 != 0) {
+                if (num1 != 0) {
                     rez = num1 / num2;
                     convertResult(rez, isRoman);
                 } else
@@ -60,23 +60,22 @@ public class Main {
         }
 
     }
+
     private static void volidateNumber(int num) throws Exception {
 
-        if((num < 0) || (num > 10)) {
+        if ((num < 0) || (num > 10)) {
             throw new Exception("Неверный диапозон ввода.");
 
         }
-
     }
-
-    private static void convertResult(int rez, boolean isRoman) {
+    private static void convertResult(int rez, boolean isRoman) throws Exception {
         if(isRoman) {
             System.out.println(convertNumToRoman(rez));
         } else {
             System.out.println(rez);
         }
     }
-
+    
     private static String[] toInputArray(String string) throws Exception {
         if(string.contains("+")) {
             return getArray(string, "\\+");
@@ -100,8 +99,8 @@ public class Main {
         return new String[] {array[0].trim(), znak, array[1].trim()};
     }
 
-    private static String convertNumToRoman (int numArabian) {
-        String[] roman = {"O", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX",
+    private static String convertNumToRoman (int numArabian) throws Exception {
+        String[] roman = {null, "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX",
             "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX", "XL",
             "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "XLIX", "L", "LI", "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX",
             "LXI", "LXII", "LXIII", "LXIV", "LXV", "LXVI", "LXVII", "LXVIII", "LXIX", "LXX",
@@ -110,6 +109,9 @@ public class Main {
             "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCVII", "XCVIII", "XCIX", "C"
         };
         final String s = roman[numArabian];
+        if (s == null) {
+            throw new Exception("Неверное действие с римскими цыфрами.");
+        }
         return s;
     }
 
